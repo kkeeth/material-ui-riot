@@ -31,13 +31,11 @@ Github:
 Npm:
 
 ```
-  npm install riot-mui
-```
+  npm install material-ui-riot
 
-Bower:
+  or
 
-```
-  bower install riot-mui
+  yarn add material-ui-riot
 ```
 
 ## Getting started
