@@ -1,0 +1,24 @@
+<material-checkbox>
+    <div class={ `checkbox ${checked && "checked"}` } onclick={ toggle }>
+      <div class="checkmark"></div>
+    </div>
+    <div class="label" onclick={ toggle }><slot /></div>
+    <input type="hidden" name={ props.ref } value={ checked }>
+    <script>
+    export default {
+      onBeforeMount(props) {
+        this.checked = props.checked || false;
+        // Attributes
+        this.disabled = props.disabled || false;
+      },
+      /**
+        * Toggle checkbox
+        */
+      toggle() {
+        if (this.disabled) return false;
+        this.update({ checked: !this.checked });
+        this.trigger('toggle', this.checked);
+      }
+    }
+  </script>
+</material-checkbox>

@@ -1,0 +1,47 @@
+{
+  "name": "material-ui-riot",
+  "version": "1.0.0",
+  "description": "Set of material ui components for riot js.",
+  "main": "build/js/riot-mui-min.js",
+  "author": "Keeth Kuwahara",
+  "scripts": {
+    "build:dev": "webpack -c --mode development",
+    "build:prod": "webpack -c --mode production",
+    "test": "nyc --require esm --require jsdom-global/register --require ./test/register-riot-extension.js mocha src/**/*.spec.js",
+    "start": "webpack-dev-server --inline --watch --hot --colors -d --port 3000",
+    "cov": "nyc report --reporter=text-lcov | coveralls",
+    "prepublishOnly": "npm test",
+    "cov-html": "nyc report --reporter=html"
+  },
+  "contributor": {
+    "name": "kkeeth",
+    "email": "zensin0082@gmail.com"
+  },
+  "keywords": "riot, mui, material, interface",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@riotjs/compiler": "^4.9.3",
+    "@riotjs/hot-reload": "^4.0.1",
+    "@riotjs/webpack-loader": "^4.0.3",
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^8.1.0",
+    "babel-preset-es2015-riot": "^1.1.0",
+    "chai": "^4.2.0",
+    "css-loader": "^4.2.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "mocha": "^8.1.0",
+    "node-sass": "^4.5.2",
+    "nyc": "^15.1.0",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "riot": "^4.13.4"
+  }
+}
