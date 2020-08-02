@@ -1,10 +1,13 @@
 <material-checkbox>
-    <div class={ `checkbox ${checked && "checked"}` } onclick={ toggle }>
-      <div class="checkmark"></div>
-    </div>
-    <div class="label" onclick={ toggle }><slot /></div>
-    <input type="hidden" name={ props.ref } value={ checked }>
-    <script>
+  <div class={ `checkbox ${checked && "checked"}` } onclick={ toggle }>
+    <div class="checkmark"></div>
+  </div>
+  <div class="label" onclick={ toggle }>
+    <slot />
+  </div>
+  <input type="hidden" name={ props.ref } value={ checked }>
+
+  <script>
     export default {
       onBeforeMount(props) {
         this.checked = props.checked || false;
