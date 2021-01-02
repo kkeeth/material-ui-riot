@@ -55,6 +55,7 @@
           </material-input>
         </div>
         <div class="item">
+          hogehoge
           <material-button ref="button">
             <div class="text">BUTTON</div>
           </material-button>
@@ -63,8 +64,9 @@
           <div class="item">
             <div class="button-container">
               <material-button ref="buttonOne" onclick="openDropdown()">
-                <div class="text">Toggle Dropdown</div> </material-button
-              ><br />
+                <div class="text">Toggle Dropdown</div>
+              </material-button>
+              <br />
               <material-dropdown ref="dropdown" ref="dropDownOne">
                 <p>DropDown content</p>
               </material-dropdown>
@@ -213,55 +215,58 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/riot/3.3.2/riot+compiler.min.js"></script>
+    <script src="https://unpkg.com/riot/riot+compiler.min.js"></script>
     <script src="build/js/riot-mui.js"></script>
-
     <script>
-      var mounted = null;
-      window.addEventListener("load", function () {
-        mounted = riot.mount("*");
-        var button = findTag(mounted, "button");
-        var input = findTag(mounted, "custom-input");
+      let mounted = null
 
-        button.on("wavestart", function (waveInstance) {
-          console.log("Wave has started", waveInstance);
-        });
-        button.on("waveend", function () {
-          console.log("Wave has eneded");
-        });
+      riot
+        .compile()
+        .then(() => {
+          mounted = riot.mount("material-button")
 
-        input.opts.iconClicked = function (e) {
-          console.log(
-            "Custom handler. Can be transmitted through attributes",
-            e
-          );
-        };
+          const button = findTag(mounted, "button")
+          const input = findTag(mounted, "custom-input")
 
-        input.on("iconClick", function (e) {
-          console.log(e, "ICON CLICK!");
-        });
-      });
+          button.on("wavestart", function (waveInstance) {
+            console.log("Wave has started", waveInstance)
+          })
+          button.on("waveend", function () {
+            console.log("Wave has eneded")
+          })
 
-      function openDropdown() {
+          input.opts.iconClicked = function (e) {
+            console.log(
+              "Custom handler. Can be transmitted through attributes",
+              e
+            )
+          }
+
+          input.on("iconClick", function (e) {
+            console.log(e, "ICON CLICK!")
+          })
+        })
+
+      const openDropdown = () => {
         var dropdown = findTag(mounted, "dropdown");
         !dropdown.opened ? dropdown.open() : dropdown.close();
       }
-      function openDropdownTwo() {
+      const openDropdownTwo = () => {
         var dropdown = findTag(mounted, "dropdown2");
         !dropdown.opened ? dropdown.open() : dropdown.close();
       }
-      function openPopup() {
+      const openPopup = () => {
         var popup = findTag(mounted, "popupOne");
         !popup.opened ? popup.open() : popup.close();
       }
-      function launchToast() {
+      const launchToast = () => {
         var snackbar = findTag(mounted, "snackbar");
         snackbar.addToast({
           message: "Toast was fired. To close it just click on it!",
         });
       }
-      function findTag(pack, name) {
-        var searched = null;
+      const findTag = (pack, name) => {
+        let searched = null;
         pack.forEach(function (tag) {
           if (
             (tag.root.getAttribute("ref") &&

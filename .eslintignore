@@ -1,0 +1,4 @@
+*.html
+build/
+!.*.js
+node_modules/

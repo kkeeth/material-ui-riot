@@ -1,59 +1,101 @@
-const webpack = require("webpack");
 const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const extractSass = new ExtractTextPlugin("styles/riot-mui.min.css");
+const webpack = require("webpack");
 
-const plugins = [new webpack.optimize.OccurrenceOrderPlugin(), extractSass];
+module.exports = (env, argv) => {
+  const enabledSourceMap = argv.mode || "development";
 
-module.exports = {
-  entry: {
-    "riot-mui": "./src/index",
-    "riot-mui-min": "./src/index",
-  },
-  output: {
-    path: path.resolve(__dirname, "build"),
-    publicPath: "/build/",
-    filename: "js/[name].js",
-  },
-  target: "node",
-  plugins: plugins,
-  devtool: "inline",
-  module: {
-    rules: [
-      {
-        test: /\.riot$/,
-        exclude: /node_modules/,
-        use: [
-          {
+  return {
+    entry: {
+      "riot-mui": [
+        "./src/index",
+        "./node_modules/ress/ress.css"
+      ],
+      "riot-mui-min": [
+        "./src/index",
+        "./node_modules/ress/ress.css"
+      ]
+    },
+    output: {
+      path: path.resolve(__dirname, "build"),
+      publicPath: "/build/",
+      filename: "js/[name].js",
+      libraryTarget: "umd"
+    },
+    devtool: "inline",
+    target: "node",
+    optimization: {
+      minimize: true,
+      splitChunks: {
+        chunks: "async",
+        minSize: 30000,
+        minChunks: 1,
+        maxAsyncRequests: 6,
+        maxInitialRequests: 4,
+        automaticNameDelimiter: "~",
+        cacheGroups: {
+          defaultVendors: {
+            test: /[\\/]node_modules[\\/]/,
+            priority: -10
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        }
+      }
+    },
+    module: {
+      rules: [
+        {
+          test: /\.riot$/,
+          exclude: /node_modules/,
+          use: [{
             loader: "@riotjs/webpack-loader",
             options: {
-              hot: true,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: extractSass.extract({
-          fallback: "style-loader",
+              hot: true
+            }
+          }]
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: [{
+            loader: "babel-loader",
+            options: {
+              sourceMap: false
+            }
+          }],
+        },
+        {
+          test: /\.(scss|css)$/,
+          exclude: /node_modules/,
           use: [
+            "style-loader",
             {
               loader: "css-loader",
-              query: {
-                minimize: true,
-              },
+              options: {
+                url: true,
+                sourceMap: enabledSourceMap
+              }
             },
-            "sass-loader",
-          ],
-        }),
+            {
+              loader: "sass-loader",
+              options: {
+                sourceMap: enabledSourceMap
+              }
+            }
+          ]
+        }
+      ],
+    },
+    devServer: {
+      open: true,
+      contentBase: "./",
+      historyApiFallback: {
+        index: "index.html"
       },
-    ],
-  },
-  devServer: {
-    contentBase: "./",
-    historyApiFallback: true,
-    hot: true,
-    host: "0.0.0.0",
-    inline: true,
-  },
+      hot: true
+    }
+  };
 };

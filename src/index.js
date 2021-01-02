@@ -9,7 +9,7 @@ import "./plugins/dynamicAttributes";
 import "./plugins/riotHelpers";
 import "./plugins/validate";
 
-// require("./material-elements/material-button/material-button.riot");
+import MuiButton from "./material-elements/material-button/material-button.riot";
 // require("./material-elements/material-card/material-card.riot");
 import MuiCheckbox from "./material-elements/material-checkbox/material-checkbox.riot";
 // require("./material-elements/material-combo/material-combo.riot");
@@ -43,4 +43,5 @@ import MuiCheckbox from "./material-elements/material-checkbox/material-checkbox
 // require("./material-elements/material-waves/material-waves.scss");
 // require("./material-elements/material-footer/material-footer.scss");
 
-register("mui-checkbox", MuiCheckbox);
+register("material-checkbox", MuiCheckbox);
+register("material-button", MuiButton);

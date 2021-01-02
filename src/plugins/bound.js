@@ -7,17 +7,20 @@ import { install } from "riot";
 export default class Bound {
   /**
    * Get Bounds
-   * @returns {*}
+   * @return {*}
    */
   receiveBound() {
-    if (!this.container)
-      console.error(
-        "Yor class must contain a container. It is DOM Element. Define please this.container property."
-      );
-    var document,
-      window,
-      box,
-      doc = this.container && this.container.ownerDocument;
+    if (!this.container) {
+      console.error(`
+        Yor class must contain a container. \n
+        It is DOM Element. Define please this.container property.
+      `);
+    }
+    let document;
+    let window;
+    let box;
+    const doc = this.container && this.container.ownerDocument;
+
     // Get document
     document = doc.documentElement;
     // Get container
@@ -35,8 +38,8 @@ export default class Bound {
 
   /**
    * Window or not?
-   * @param o - supposing object
-   * @returns {boolean}
+   * @param {object} o - supposing object
+   * @return {boolean}
    */
   isWindow(o) {
     return o !== null && o === o.window;
@@ -44,8 +47,8 @@ export default class Bound {
 
   /**
    * Get window method
-   * @param e - supposing object
-   * @returns {*}
+   * @param {object} o - supposing object
+   * @return {*}
    */
   getWindow(o) {
     return this.isWindow(o) ? o : o.nodeType === 9 && o.defaultView;
@@ -53,12 +56,12 @@ export default class Bound {
 
   /**
    * Simple mixin. Unfortunately, babel doesn't support Object.assign \ or mixin
-   * @param so
-   * @param to
-   * @returns {*}
+   * @param {object} so
+   * @param {object} to
+   * @return {*}
    */
   mix(so, to) {
-    for (var key in so) {
+    for (const key in so) {
       // only copy if not already present
       if (!(key in to)) {
         to[key] = so[key];

@@ -1,7 +1,7 @@
-import { registerPreprocessor } from "@riotjs/compiler";
+import { registerPostprocessor } from "@riotjs/compiler";
 import babel from "@babel/core";
 
-registerPreprocessor("javascript", "babel", function (code, { options }) {
+registerPostprocessor((code, { options }) => {
   return babel.transform(code, {
     sourceMaps: true,
     retainLines: true,
@@ -11,13 +11,13 @@ registerPreprocessor("javascript", "babel", function (code, { options }) {
         "@babel/preset-env",
         {
           targets: {
-            edge: true,
+            ie: 11,
+            node: 12
           },
           loose: true,
-          modules: false,
-          useBuiltIns: "usage",
-        },
-      ],
-    ],
+          useBuiltIns: "entry"
+        }
+      ]
+    ]
   });
 });

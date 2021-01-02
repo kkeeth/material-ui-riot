@@ -7,41 +7,60 @@
   "scripts": {
     "build:dev": "webpack -c --mode development",
     "build:prod": "webpack -c --mode production",
+    "format": "prettier --write 'src/**/*.js'",
     "test": "nyc --require esm --require jsdom-global/register --require ./test/register-riot-extension.js mocha src/**/*.spec.js",
-    "start": "webpack-dev-server --inline --watch --hot --colors -d --port 3000",
+    "start": "webpack-dev-server --inline --watch --hot --colors -d --port 3000 --mode=development",
     "cov": "nyc report --reporter=text-lcov | coveralls",
     "prepublishOnly": "npm test",
+    "lint": "eslint --fix --ext .js .",
     "cov-html": "nyc report --reporter=html"
   },
   "contributor": {
     "name": "kkeeth",
     "email": "zensin0082@gmail.com"
   },
-  "keywords": "riot, mui, material, interface",
+  "keywords": [
+    "riot",
+    "mui",
+    "material",
+    "interface"
+  ],
   "license": "MIT",
+  "homepage": "https://kkeeth.github.io/riot-mui/",
   "devDependencies": {
-    "@babel/core": "^7.11.0",
-    "@babel/preset-env": "^7.11.0",
-    "@riotjs/compiler": "^4.9.3",
-    "@riotjs/hot-reload": "^4.0.1",
-    "@riotjs/webpack-loader": "^4.0.3",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@riotjs/compiler": "^5.1.3",
+    "@riotjs/hot-reload": "^5.0.0",
+    "@riotjs/webpack-loader": "^5.0.0",
     "babel": "^6.23.0",
-    "babel-core": "^6.24.0",
-    "babel-loader": "^8.1.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
     "babel-preset-es2015-riot": "^1.1.0",
     "chai": "^4.2.0",
-    "css-loader": "^4.2.0",
+    "css-loader": "^5.0.1",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "mocha": "^8.1.0",
-    "node-sass": "^4.5.2",
+    "mocha": "^8.2.1",
+    "node-sass": "^5.0.0",
     "nyc": "^15.1.0",
-    "sass-loader": "^9.0.2",
-    "style-loader": "^1.2.1",
-    "webpack": "^4.44.1",
+    "prettier": "^2.2.1",
+    "prettier-eslint": "^12.0.0",
+    "prettier-eslint-cli": "^5.0.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.1"
   },
   "dependencies": {
-    "riot": "^4.13.4"
-  }
+    "@riotjs/observable": "^4.0.4",
+    "ress": "^3.0.0",
+    "riot": "^5.1.2",
+    "util": "^0.12.3"
+  },
+  "browserslist": "> 0.25%, not dead"
 }
