@@ -55,7 +55,6 @@
           </material-input>
         </div>
         <div class="item">
-          hogehoge
           <material-button ref="button">
             <div class="text">BUTTON</div>
           </material-button>
@@ -217,13 +216,17 @@
 
     <script src="https://unpkg.com/riot/riot+compiler.min.js"></script>
     <script src="build/js/riot-mui.js"></script>
+
+    <!-- components -->
+    <script src="src/material-elements/material-button/material-button.riot" type="riot"></script>
+    <script src="src/material-elements/material-waves/material-waves.riot" type="riot"></script>
     <script>
       let mounted = null
 
       riot
         .compile()
         .then(() => {
-          mounted = riot.mount("material-button")
+          mounted = riot.mount("material-button, material-waves")
 
           const button = findTag(mounted, "button")
           const input = findTag(mounted, "custom-input")

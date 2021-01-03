@@ -2,18 +2,13 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = (env, argv) => {
-  const enabledSourceMap = argv.mode || "development";
+  const enabledSourceMap = argv.mode === "development"
+    ? true : false;
 
   return {
     entry: {
-      "riot-mui": [
-        "./src/index",
-        "./node_modules/ress/ress.css"
-      ],
-      "riot-mui-min": [
-        "./src/index",
-        "./node_modules/ress/ress.css"
-      ]
+      "riot-mui": "./src/index",
+      "riot-mui-min": "./src/index"
     },
     output: {
       path: path.resolve(__dirname, "build"),
@@ -45,6 +40,11 @@ module.exports = (env, argv) => {
         }
       }
     },
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src")
+      }
+    },
     module: {
       rules: [
         {
@@ -53,6 +53,7 @@ module.exports = (env, argv) => {
           use: [{
             loader: "@riotjs/webpack-loader",
             options: {
+              type: "es6",
               hot: true
             }
           }]
@@ -60,12 +61,30 @@ module.exports = (env, argv) => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: [{
-            loader: "babel-loader",
-            options: {
-              sourceMap: false
+          enforce: "pre",
+          use: [
+            {
+              loader: "eslint-loader",
+              options: {
+                fix: true,
+                emitWarning: true
+              }
             }
-          }],
+          ],
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: "babel-loader",
+              options: {
+                presets: [
+                  "@babel/preset-env",
+                ],
+              }
+            }
+          ]
         },
         {
           test: /\.(scss|css)$/,
@@ -95,7 +114,8 @@ module.exports = (env, argv) => {
       historyApiFallback: {
         index: "index.html"
       },
-      hot: true
+      hot: true,
+      port: 3333
     }
   };
 };

@@ -1,7 +1,6 @@
 import "@riotjs/hot-reload";
 import { register } from "riot";
 
-import "./plugins/preprocessor";
 import "./plugins/bound";
 import "./plugins/collection";
 import "./plugins/content";
@@ -23,10 +22,10 @@ import MuiCheckbox from "./material-elements/material-checkbox/material-checkbox
 // require("./material-elements/material-spinner/material-spinner.riot");
 // require("./material-elements/material-tabs/material-tabs.riot");
 // require("./material-elements/material-textarea/material-textarea.riot");
-// require("./material-elements/material-waves/material-waves.riot");
+import MuiWaves from "./material-elements/material-waves/material-waves.riot";
 // require("./material-elements/material-footer/material-footer.riot");
 
-// require("./material-elements/material-button/material-button.scss");
+import "./material-elements/material-button/material-button.scss";
 // require("./material-elements/material-card/material-card.scss");
 // require("./material-elements/material-checkbox/material-checkbox.scss");
 // require("./material-elements/material-combo/material-combo.scss");
@@ -40,8 +39,9 @@ import MuiCheckbox from "./material-elements/material-checkbox/material-checkbox
 // require("./material-elements/material-spinner/material-spinner.scss");
 // require("./material-elements/material-tabs/material-tabs.scss");
 // require("./material-elements/material-textarea/material-textarea.scss");
-// require("./material-elements/material-waves/material-waves.scss");
+import "./material-elements/material-waves/material-waves.scss";
 // require("./material-elements/material-footer/material-footer.scss");
 
 register("material-checkbox", MuiCheckbox);
 register("material-button", MuiButton);
+register("material-waves", MuiWaves);

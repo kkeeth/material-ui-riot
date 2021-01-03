@@ -1,7 +1,13 @@
 <material-button>
   <material-waves
-    onclick={ click } onmousedown={ launch } center={ props.wavesCenter } rounded={ props.rounded } opacity={ props.wavesOpacity } color={ props.wavesColor }
-                  duration={ props['waves-duration'] } class="material-waves"></material-waves>
+    onclick={ click }
+    onmousedown={ launch }
+    center={ props.wavesCenter }
+    rounded={ props.rounded }
+    opacity={ props.wavesOpacity }
+    color={ props.wavesColor }
+    duration={ props['waves-duration'] }
+    class="material-waves" />
   <div class="content">
     <slot />
   </div>
@@ -14,32 +20,32 @@
       disabled: false,
       // Launch waves
       launch(e) {
-        if(!this.disabled) this.$('.material-waves').trigger('launch',e);
+        if (!this.disabled) this.$('.material-waves').trigger('launch', e);
       },
       onBeforeMount(props) {
         this.disabled = props.disabled
       },
       onMounted() {
-        console.log("hogehoge")
         /**
           * When wave will be starting invoke appropriate event
           */
-        this.$('.material-waves').on('wavestart', (wave)=>{
-            this.trigger('wavestart',wave);
-        });
+        // this.$('.material-waves').on('wavestart', (wave)=>{
+        //     this.trigger('wavestart',wave);
+        // });
         /**
           * When wave will end invoke appropriate event
           */
-        this.$('.material-waves').on('waveend',()=>{
-            this.trigger('waveend');
-        });
+        // this.$('.material-waves').on('waveend',()=>{
+        //     this.trigger('waveend');
+        // });
         // Add mixin
         this.mixin('dynamicAttributes');
       },
       // Trigger the click
       click() {
-          if(this.props.link) window.location.href=this.props.link;
-          this.trigger('click');
+        console.log("test")
+          if (this.props.link) window.location.href = this.props.link;
+          // this.trigger('click');
       }
     }
   </script>
